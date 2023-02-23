@@ -19,16 +19,46 @@ function UsernameForm({onSubmitUsername}) {
 
   // 🐨 make sure to associate the label to the input.
   // to do so, set the value of 'htmlFor' prop of the label to the id of input
+  const refObject = React.useRef();
+
+  const [input, changeInput] = React.useState('');
+  //state to keep track of if they have a capital letter error
+  // const [isError, toggleError] = React.useState(false);
+  
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // console.dir()
+    // const value = e.target.elements[0].value;
+    onSubmitUsername(refObject.current.value);
+  }
+
+  const handleChange = (e) => {
+    e.preventDefault();
+    const { value } = e.target;
+    
+    changeInput(value.toLowerCase());
+
+
+    //for sending an error when they type a capital letter
+    // if (value !== value.toLowerCase()) {
+    //   toggleError(true);
+    // } else {
+    //   toggleError(false);
+    // }
+  }
+
   return (
-    <form>
+    <form onSubmit={handleSubmit} >
       <div>
-        <label>Username:</label>
-        <input type="text" />
+        <label htmlFor='input'>Username:</label>
+        <input id="input" type="text" ref={refObject} onChange={handleChange } value={input} />
+        <button type="submit" >Submit</button>
       </div>
-      <button type="submit">Submit</button>
     </form>
   )
 }
+// {isError && <div role="alert" style={{backgroundColor: 'red'}}>Username must be lower case</div>}
+{/* <button type="submit" disabled={isError}>Submit</button> */}
 
 function App() {
   const onSubmitUsername = username => alert(`You entered: ${username}`)
@@ -36,3 +66,4 @@ function App() {
 }
 
 export default App
+ 

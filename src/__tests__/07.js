@@ -1,8 +1,8 @@
 import * as React from 'react'
 import {render, screen, within} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import App from '../final/07'
-// import App from '../exercise/07'
+// import App from '../final/07'
+import App from '../exercise/07'
 
 test('renders', async () => {
   const {container} = render(<App />)
@@ -25,3 +25,4 @@ test('renders', async () => {
     expect(label.textContent).toBe(input.value)
   })
 })
+ 
